@@ -1,0 +1,16 @@
+{
+  "name": "Pleasure",
+  "version": "0.0.1",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "2.0.3",
+    "angular": "1.0.7",
+    "bootstrap": "2.3.2"
+  }
+}

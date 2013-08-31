@@ -1,0 +1,48 @@
+<!DOCTYPE html>{% load js %}
+<html lang="ru" ng-app="foodDiaryApp">
+    <head>
+        <title>{% block title %}{% endblock %} &mdash; Дневник питания</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="{{ STATIC_URL }}css/screen.css" rel="stylesheet" media="screen">
+        {% block extra_css %}
+        {% endblock %}
+    </head>
+    <body class="{% block body_class %}{% endblock %}">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <a class="brand" href="{% url 'home_page' %}">
+                    Food tracker
+                </a>
+                <ul class="nav pull-left">
+
+                </ul>
+                <ul class="nav pull-right">
+
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </body>
+
+    <!-- Vendors -->
+    {% if debug %}
+        <script src="{{ STATIC_URL }}bower_components/jquery/jquery.min.js" type="text/javascript"></script>
+        <script src="{{ STATIC_URL }}bower_components/angular/angular.min.js" type="text/javascript"></script>
+    {% else %}
+        <script src="{{ STATIC_URL }}bower_components/jquery/jquery.js" type="text/javascript"></script>
+        <script src="{{ STATIC_URL }}bower_components/angular/angular.js" type="text/javascript"></script>
+    {% endif %}
+    {% django_js jquery=false i18n=false csrf=true %}
+
+    <script src="{{ STATIC_URL }}js/app/app.js" type="text/javascript"></script>
+
+    {% block extra_js %}
+    {% endblock %}
+
+    {% include "includes/metrika.html" %}
+</html>
