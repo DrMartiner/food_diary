@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from rest_framework.serializers import HyperlinkedModelSerializer
-from .models import Food
-from .models import Eating
-from .models import EatingFood
+from apps.food.models import Food
+from apps.food.models import Eating
+from apps.food.models import EatingFood
 
 
 class FoodSerializerDisplay(HyperlinkedModelSerializer):
@@ -28,7 +28,7 @@ class FoodSerializerSave(HyperlinkedModelSerializer):
     class Meta:
         model = Food
         exclude = ('user', )
-        fields = ('nmae', )
+        fields = ('name', )
 
 
 class EatingSerializerSave(HyperlinkedModelSerializer):
