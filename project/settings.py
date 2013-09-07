@@ -89,7 +89,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'constance.context_processors.config',
 )
 
-ROOT_URLCONF = SITE_NAME + '.urls'
+ROOT_URLCONF = 'project.urls'
 WSGI_APPLICATION = SITE_NAME + '.wsgi.application'
 
 TEMPLATE_DIRS = (
@@ -114,6 +114,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'factory',
 
+    'apps.api',
     'apps.food',
     'django_cleanup',
 

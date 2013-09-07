@@ -28,4 +28,5 @@ django-cleanup
 RandomWords==0.1.5
 psycopg2
 fabric
-djangorestframework==2.3.6
+django-tastypie
+python-mimeparse
