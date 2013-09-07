@@ -15,7 +15,7 @@ sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
 SITE_NAME = path.basename(path.realpath(path.curdir))
 SITE_ROOT = os.path.join(path.realpath(path.pardir), SITE_NAME)
 
-DEBUG = bool(os.environ.get('DEBUG', False))
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -89,7 +89,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'constance.context_processors.config',
 )
 
-ROOT_URLCONF = SITE_NAME + '.urls'
+ROOT_URLCONF = 'project.urls'
 WSGI_APPLICATION = SITE_NAME + '.wsgi.application'
 
 TEMPLATE_DIRS = (
@@ -114,6 +114,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'factory',
 
+    'apps.api',
     'apps.food',
     'django_cleanup',
 
