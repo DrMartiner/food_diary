@@ -6,11 +6,13 @@ from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from apps.simple_page.views import HomePage
+from apps.simple_page.views import MyDiaryPage
 
 admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', HomePage.as_view(), name='home_page'),
+    url(r'^my-diary/$', MyDiaryPage.as_view(), name='my_diary'),
     url(r'^api/', include('apps.api.urls')),
     # url(r'^account/', include('apps.users.urls')),
 

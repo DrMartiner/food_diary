@@ -9,7 +9,7 @@ try:
 except ImportError:
     print "Don't forget create settings_local.py"
 
-PROJECT_ROOT = os.path.normpath(os.path.dirname(__file__))
+PROJECT_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
 
 SITE_NAME = path.basename(path.realpath(path.curdir))
@@ -93,7 +93,7 @@ ROOT_URLCONF = 'project.urls'
 WSGI_APPLICATION = SITE_NAME + '.wsgi.application'
 
 TEMPLATE_DIRS = (
-    os.path.join(SITE_ROOT, 'templates'),
+    os.path.join(PROJECT_ROOT, 'templates'),
 )
 
 INSTALLED_APPS = (

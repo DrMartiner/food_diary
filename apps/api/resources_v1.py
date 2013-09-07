@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+import json
 
 from django.db.models import Q
+from django.forms import model_to_dict
 from tastypie.resources import ModelResource
 from tastypie.authorization import Authorization
 from tastypie.authentication import SessionAuthentication
@@ -71,6 +73,16 @@ class FoodResource(BaseResource):
 
 
 class EatingResource(BaseResource):
+    def dehydrate(self, bundle):
+        bundle.data['foods'] = []
+        for food in bundle.obj.foods:
+            bundle.data['foods'].append({
+                'id': food.id,
+                'name': food.food.name,
+                'count': food.count,
+            })
+        return bundle
+
     def custom_sorting(self, objects, request):
         return objects.filter(user=request.user)
 

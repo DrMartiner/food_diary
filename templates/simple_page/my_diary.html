@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Приемы пищи{% endblock %}
+{% block body_class %}eating{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ STATIC_URL }}js/app/eating/controllers.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}js/app/food/controllers.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="span6" ng-controller="EatingController" ng-init="loadEatings()" ng-cloak="">
+            <h1>Приемы пищи</h1>
+
+            {% verbatim %}
+                <div ng-repeat="eating in eatings">
+                    <span ng-click="eating.expand=!eating.expand">
+                        {{ eating.pub_date }}
+                    </span>
+                    <div class="eating-foods" ng-show="eating.expand">
+                        <ul>
+                            <li ng-repeat="food in eating.foods">
+                                {{ food.name }} - {{ food.count }} [{{ food.id }}]
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            {% endverbatim %}
+        </div>
+        <div class="span6">
+            <h1>Моя еда</h1>
+        </div>
+    </div>
+{% endblock %}
