@@ -15,7 +15,7 @@ sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
 SITE_NAME = path.basename(path.realpath(path.curdir))
 SITE_ROOT = os.path.join(path.realpath(path.pardir), SITE_NAME)
 
-DEBUG = bool(os.environ.get('DEBUG', False))
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
