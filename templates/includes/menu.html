@@ -4,21 +4,22 @@
         <a class="brand {% ifnotequal request.path home_page_url %}active{% endifnotequal %}" href="{{ home_page_url }}">
             Главная
         </a>
-    <ul class="nav pull-left">
-        {% url 'my_diary' as my_diary_url %}
-        <li {% ifequal request.path my_diary_url %}class="active"{% endifequal %}>
-            <a href="{{ my_diary_url }}">Мой дневник</a>
-        </li>
-    </ul>
-    <ul class="nav pull-right">
-        <li {% ifequal request.path '/how-it-work/' %}class="active"{% endifequal %}>
-            <a href="/how-it-work/">Как это работает</a>
-        </li>
-        <li {% ifequal request.path '/offert/' %}class="active"{% endifequal %}>
-            <a href="/offert/">Договор</a>
-        </li>
-        <li>
-            <a href="#">Вход</a>
-        </li>
-    </ul>
+        <ul class="nav pull-left">
+            {% url 'my_diary' as my_diary_url %}
+            <li {% ifequal request.path my_diary_url %}class="active"{% endifequal %}>
+                <a href="{{ my_diary_url }}">Мой дневник</a>
+            </li>
+        </ul>
+        <ul class="nav pull-right">
+            <li {% ifequal request.path '/how-it-work/' %}class="active"{% endifequal %}>
+                <a href="/how-it-work/">Как это работает</a>
+            </li>
+            <li {% ifequal request.path '/offert/' %}class="active"{% endifequal %}>
+                <a href="/offert/">Договор</a>
+            </li>
+            <li>
+                <a href="#">Вход</a>
+            </li>
+        </ul>
+    </div>
 </div>
