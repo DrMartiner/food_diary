@@ -16,6 +16,7 @@
             {% verbatim %}
                 <div ng-repeat="eating in eatings">
                     <span ng-click="eating.expand=!eating.expand">
+                        <i ng-class='{"icon-chevron-down": eating.expand, "icon-chevron-right": !eating.expand}'></i>
                         {{ eating.pub_date }}
                     </span>
                     <div class="eating-foods" ng-show="eating.expand">
