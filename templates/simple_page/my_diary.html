@@ -27,7 +27,7 @@
                     <div class="eating-foods" ng-show="eating.expand">
                         <ul>
                             <li>
-                                <form ng-submit="createEatingFood(eating.id)" ng-controller="EatingFoodController">
+                                <form ng-submit="createEatingFood(eating.id)" ng-controller="EatingController">
                                     <input type="hidden" ng-model="foodId" />
                                     <input type="text" required="" ng-model="foodName" />
                                     <button class="btn btn-small btn-success">

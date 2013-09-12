@@ -1,8 +1,8 @@
 (function() {
   'use strict';
-  var EatingController, EatingFoodController;
+  var EatingController;
 
-  EatingController = angular.module('foodDiaryApp').controller('EatingController', function($scope, $resource, EatingResource, EatingFoodResource) {
+  EatingController = angular.module('foodDiaryApp').controller('EatingController', function($scope, $resource, FoodResource, EatingResource, EatingFoodResource) {
     $scope.eatings = [];
     $scope.foodId = null;
     $scope.foodName = null;
@@ -37,7 +37,7 @@
         return _results;
       });
     };
-    return $scope.deleteEatingFood = function(eatingId, eatingFoodId) {
+    $scope.deleteEatingFood = function(eatingId, eatingFoodId) {
       return EatingFoodResource["delete"]({
         id: eatingFoodId
       }, function() {
@@ -64,9 +64,6 @@
         return _results;
       });
     };
-  });
-
-  EatingFoodController = angular.module('foodDiaryApp').controller('EatingFoodController', function($scope, $resource, FoodResource, EatingFoodResource) {
     return $scope.createEatingFood = function(eatingId) {
       var addEatingFood, data;
       addEatingFood = function(eatingFood) {

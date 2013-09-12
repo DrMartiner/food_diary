@@ -1,7 +1,7 @@
 'use strict';
 
 EatingController = angular.module('foodDiaryApp')
-    .controller 'EatingController', ($scope, $resource, EatingResource, EatingFoodResource) ->
+    .controller 'EatingController', ($scope, $resource, FoodResource, EatingResource, EatingFoodResource) ->
         $scope.eatings = []
         $scope.foodId = null
         $scope.foodName = null
@@ -34,8 +34,6 @@ EatingController = angular.module('foodDiaryApp')
                                 break
                         break
 
-EatingFoodController = angular.module('foodDiaryApp')
-    .controller 'EatingFoodController', ($scope, $resource, FoodResource, EatingFoodResource) ->
         $scope.createEatingFood = (eatingId) ->
             addEatingFood = (eatingFood) ->
                 eatingFood.name = $scope.foodName
