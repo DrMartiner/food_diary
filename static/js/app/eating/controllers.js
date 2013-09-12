@@ -2,7 +2,7 @@
   'use strict';
   var EatingController;
 
-  EatingController = angular.module('foodDiaryApp').controller('EatingController', function($scope, $resource, FoodResource, EatingResource, EatingFoodResource) {
+  EatingController = angular.module('foodDiaryApp').controller('EatingController', function($scope, FoodResource, EatingResource, EatingFoodResource) {
     $scope.eatings = [];
     $scope.foodId = null;
     $scope.foodName = null;

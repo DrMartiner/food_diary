@@ -1,7 +1,7 @@
 'use strict';
 
 EatingController = angular.module('foodDiaryApp')
-    .controller 'EatingController', ($scope, $resource, FoodResource, EatingResource, EatingFoodResource) ->
+    .controller 'EatingController', ($scope, FoodResource, EatingResource, EatingFoodResource) ->
         $scope.eatings = []
         $scope.foodId = null
         $scope.foodName = null
