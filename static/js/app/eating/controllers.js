@@ -6,6 +6,7 @@
     $scope.eatings = [];
     $scope.foodId = null;
     $scope.foodName = null;
+    $scope.foodCount = null;
     $scope.loadEatings = function() {
       return EatingResource.get(function(result) {
         return $scope.eatings = result.objects;
@@ -79,11 +80,13 @@
           }
         }
         $scope.foodId = null;
-        return $scope.foodName = null;
+        $scope.foodName = null;
+        return $scope.foodCount = null;
       };
       if ($scope.foodId) {
         data = {
           food_id: $scope.foodId,
+          count: $scope.foodCount,
           eating_id: eatingId
         };
         return EatingFoodResource.save(data, addEatingFood);

@@ -5,6 +5,7 @@ EatingController = angular.module('foodDiaryApp')
         $scope.eatings = []
         $scope.foodId = null
         $scope.foodName = null
+        $scope.foodCount = null
 
         $scope.loadEatings = () ->
             EatingResource.get (result) ->
@@ -44,10 +45,12 @@ EatingController = angular.module('foodDiaryApp')
                         break
                 $scope.foodId = null
                 $scope.foodName = null
+                $scope.foodCount = null
 
             if $scope.foodId
                 data =
                     food_id: $scope.foodId
+                    count: $scope.foodCount
                     eating_id: eatingId
                 EatingFoodResource.save data, addEatingFood
 

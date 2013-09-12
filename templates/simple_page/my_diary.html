@@ -29,7 +29,8 @@
                             <li>
                                 <form ng-submit="createEatingFood(eating.id)" ng-controller="EatingController">
                                     <input type="hidden" ng-model="foodId" />
-                                    <input type="text" required="" ng-model="foodName" />
+                                    <input type="text" ng-model="foodName" ng-required="" />
+                                    <input type="text" ng-model="foodCount" maxlength="8" ng-maxlength="8" />
                                     <button class="btn btn-small btn-success">
                                         <i class="icon-plus"></i>
                                     </button>
@@ -46,8 +47,25 @@
                 </div>
             {% endverbatim %}
         </div>
-        <div class="span6">
+        <div class="span6" ng-controller="FoodController" ng-init="loadFoods()" ng-cloak="">
             <h1>Моя еда</h1>
+            <ul>
+                <li>
+                    <form ng-controller="FoodController" ng-submit="createFood()">
+                        <input type="text" ng-model="foodName" ng-required="" />
+                        <button class="btn btn-small btn-success">
+                            Добавить
+                            <i class="icon-plus"></i>
+                        </button>
+                    </form>
+                </li>
+                <li ng-repeat="food in foods">
+                    {{ food.name }}
+                    <button class="btn btn-small btn-danger" ng-click="deleteFood(food.id)">
+                        <i class="icon-minus"></i>
+                    </button>
+                </li>
+            </ul>
         </div>
     </div>
 {% endblock %}
