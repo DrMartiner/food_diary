@@ -19,10 +19,37 @@
     return cookieValue;
   };
 
-  angular.module('foodDiaryApp', []).config([
+  angular.module('foodDiaryApp', ['ngResource']).constant('apiName', 'v1').config([
     '$httpProvider', function($httpProvider) {
-      return $httpProvider.defaults.headers.post['X-CSRFToken'] = getCookie('csrftoken');
+      $httpProvider.defaults.headers.common['X-CSRFToken'] = getCookie('csrftoken');
+      $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
+      $httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
+      return $httpProvider.defaults.headers.put['Content-Type'] = 'application/json';
     }
-  ]).constant('apiName', 'v1');
+  ]).factory('FoodResource', function($resource, apiName) {
+    var url;
+    url = Django.url('api_dispatch_list', {
+      api_name: apiName,
+      resource_name: 'food'
+    });
+    url += '/:id/';
+    return $resource(url, {});
+  }).factory('EatingResource', function($resource, apiName) {
+    var url;
+    url = Django.url('api_dispatch_list', {
+      api_name: apiName,
+      resource_name: 'eating'
+    });
+    url += '/:id/';
+    return $resource(url, {});
+  }).factory('EatingFoodResource', function($resource, apiName) {
+    var url;
+    url = Django.url('api_dispatch_list', {
+      api_name: apiName,
+      resource_name: 'eatingfood'
+    });
+    url += '/:id/';
+    return $resource(url, {});
+  });
 
 }).call(this);

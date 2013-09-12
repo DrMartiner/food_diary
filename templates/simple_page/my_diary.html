@@ -12,17 +12,34 @@
     <div class="row">
         <div class="span6" ng-controller="EatingController" ng-init="loadEatings()" ng-cloak="">
             <h1>Приемы пищи</h1>
-
+            <button ng-click="createEating()" class="btn btn-large btn-success">Поесть</button>
             {% verbatim %}
                 <div ng-repeat="eating in eatings">
-                    <span ng-click="eating.expand=!eating.expand">
-                        <i ng-class='{"icon-chevron-down": eating.expand, "icon-chevron-right": !eating.expand}'></i>
-                        {{ eating.pub_date }}
+                    <span>
+                        <div ng-click="eating.expand=!eating.expand">
+                            <i ng-class='{"icon-chevron-down": eating.expand, "icon-chevron-right": !eating.expand}'></i>
+                            {{ eating.pub_date }}
+                        </div>
+                        <button class="btn btn-small btn-danger" ng-click="deleteEating(eating.id)">
+                            <i class="icon-trash"></i>
+                        </button>
                     </span>
                     <div class="eating-foods" ng-show="eating.expand">
                         <ul>
-                            <li ng-repeat="food in eating.foods">
-                                {{ food.name }} - {{ food.count }} [{{ food.id }}]
+                            <li>
+                                <form ng-submit="createEatingFood(eating.id)" ng-controller="EatingFoodController">
+                                    <input type="hidden" ng-model="foodId" />
+                                    <input type="text" required="" ng-model="foodName" />
+                                    <button class="btn btn-small btn-success">
+                                        <i class="icon-plus"></i>
+                                    </button>
+                                </form>
+                            </li>
+                            <li ng-repeat="eatingfood in eating.eatingfoods">
+                                {{ eatingfood.name }} {{ food.count }}
+                                <button class="btn btn-small btn-danger" ng-click="deleteEatingFood(eating.id, eatingfood.id)">
+                                    <i class="icon-minus"></i>
+                                </button>
                             </li>
                         </ul>
                     </div>

@@ -16,6 +16,9 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal(u'food', ['Food'])
 
+        # Adding unique constraint on 'Food', fields ['name', 'user']
+        db.create_unique(u'food_food', ['name', 'user_id'])
+
         # Adding model 'Eating'
         db.create_table(u'food_eating', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -35,6 +38,9 @@ class Migration(SchemaMigration):
 
 
     def backwards(self, orm):
+        # Removing unique constraint on 'Food', fields ['name', 'user']
+        db.delete_unique(u'food_food', ['name', 'user_id'])
+
         # Deleting model 'Food'
         db.delete_table(u'food_food')
 
@@ -83,20 +89,20 @@ class Migration(SchemaMigration):
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
         u'food.eating': {
-            'Meta': {'ordering': "('pub_date', 'user')", 'object_name': 'Eating'},
+            'Meta': {'ordering': "('-pub_date',)", 'object_name': 'Eating'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'pub_date': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"})
         },
         u'food.eatingfood': {
-            'Meta': {'ordering': "('eating',)", 'object_name': 'EatingFood'},
+            'Meta': {'object_name': 'EatingFood'},
             'count': ('django.db.models.fields.CharField', [], {'max_length': '8', 'null': 'True', 'blank': 'True'}),
             'eating': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['food.Eating']"}),
             'food': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['food.Food']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
         },
         u'food.food': {
-            'Meta': {'ordering': "('name', 'user')", 'object_name': 'Food'},
+            'Meta': {'ordering': "('name', 'user')", 'unique_together': "(('name', 'user'),)", 'object_name': 'Food'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']", 'null': 'True', 'blank': 'True'})

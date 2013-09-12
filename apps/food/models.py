@@ -15,6 +15,7 @@ class Food(models.Model):
         ordering = ('name', 'user')
         verbose_name = 'Еда'
         verbose_name_plural = 'Наименование'
+        unique_together = ('name', 'user')
 
 
 class Eating(models.Model):

@@ -11,8 +11,32 @@ getCookie = (name) ->
                 break
     return cookieValue
 
-angular.module('foodDiaryApp', [])
-    .config(['$httpProvider', ($httpProvider) ->
-        $httpProvider.defaults.headers.post['X-CSRFToken'] = getCookie 'csrftoken'
-    ])
+angular.module('foodDiaryApp', ['ngResource'])
     .constant('apiName', 'v1')
+    .config(['$httpProvider', ($httpProvider) ->
+        $httpProvider.defaults.headers.common['X-CSRFToken'] = getCookie 'csrftoken'
+        $httpProvider.defaults.headers.common['Content-Type'] = 'application/json'
+        $httpProvider.defaults.headers.post['Content-Type'] = 'application/json'
+        $httpProvider.defaults.headers.put['Content-Type'] = 'application/json'
+    ])
+    .factory('FoodResource', ($resource, apiName) ->
+        url = Django.url 'api_dispatch_list',
+            api_name: apiName
+            resource_name: 'food'
+        url += '/:id/'
+        return $resource url, {}
+    )
+    .factory('EatingResource', ($resource, apiName) ->
+        url = Django.url 'api_dispatch_list',
+            api_name: apiName
+            resource_name: 'eating'
+        url += '/:id/'
+        return $resource url, {}
+    )
+    .factory('EatingFoodResource', ($resource, apiName) ->
+        url = Django.url 'api_dispatch_list',
+            api_name: apiName
+            resource_name: 'eatingfood'
+        url += '/:id/'
+        return $resource url, {}
+    )

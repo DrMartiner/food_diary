@@ -1,17 +1,61 @@
 'use strict';
 
 EatingController = angular.module('foodDiaryApp')
-    .controller 'EatingController', ($scope, $http, apiName) ->
+    .controller 'EatingController', ($scope, $resource, EatingResource, EatingFoodResource) ->
         $scope.eatings = []
+        $scope.foodId = null
+        $scope.foodName = null
 
         $scope.loadEatings = () ->
-            url = Django.url 'api_dispatch_list',
-                api_name: apiName
-                resource_name: 'eating'
-            $http
-                url: url
-                method: 'GET'
-                headers:
-                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-            .success (data) ->
-                $scope.eatings = data.objects
+            EatingResource.get (result) ->
+                $scope.eatings = result.objects
+
+        $scope.createEating = () ->
+            EatingResource.save {}, (eating) ->
+                eating.expand = true
+                $scope.eatings.unshift eating
+
+        $scope.deleteEating = (eatingId) ->
+            EatingResource.delete {id: eatingId}, () ->
+                for eating in $scope.eatings
+                    if eating.id == eatingId
+                        index = $scope.eatings.indexOf eating
+                        $scope.eatings.splice index, 1
+                        break
+
+        $scope.deleteEatingFood = (eatingId, eatingFoodId)  ->
+            EatingFoodResource.delete {id: eatingFoodId}, () ->
+                for eating in $scope.eatings
+                    if eating.id == eatingId
+                        for eatingfood in eating.eatingfoods
+                            if eatingfood.id == eatingFoodId
+                                index = eating.eatingfoods.indexOf eatingfood
+                                eating.eatingfoods.splice index, 1
+                                break
+                        break
+
+EatingFoodController = angular.module('foodDiaryApp')
+    .controller 'EatingFoodController', ($scope, $resource, FoodResource, EatingFoodResource) ->
+        $scope.createEatingFood = (eatingId) ->
+            addEatingFood = (eatingFood) ->
+                eatingFood.name = $scope.foodName
+                for eating in $scope.eatings
+                    if eating.id == eatingId
+                        index = $scope.eatings.indexOf eating
+                        $scope.eatings[index].eatingfoods.unshift eatingFood
+                        break
+                $scope.foodId = null
+                $scope.foodName = null
+
+            if $scope.foodId
+                data =
+                    food_id: $scope.foodId
+                    eating_id: eatingId
+                EatingFoodResource.save data, addEatingFood
+
+            else
+                FoodResource.save {name: $scope.foodName}, (food) ->
+                    data =
+                        food_id: food.id
+                        eating_id: eatingId
+                    EatingFoodResource.save data, addEatingFood
