@@ -19,4 +19,3 @@ FoodController = angular.module('foodDiaryApp')
                         index = $scope.foods.indexOf food
                         $scope.foods.splice index, 1
                         break
-
