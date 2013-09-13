@@ -120,8 +120,8 @@ class EatingResource(BaseResource):
 class EatingFoodResource(BaseResource):
     def obj_create(self, bundle, **kwargs):
         kwargs.update({
-            'food_id': bundle.data['food_id'],
-            'eating_id': bundle.data['eating_id'],
+            'food_id': bundle.data.get('food_id'),
+            'eating_id': bundle.data.get('eating_id'),
             'eating_user': bundle.request.user,
         })
         return super(BaseResource, self).obj_create(bundle, **kwargs)

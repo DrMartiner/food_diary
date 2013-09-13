@@ -9,7 +9,7 @@ FoodController = angular.module('foodDiaryApp')
 
         $scope.createFood = () ->
             FoodResource.save {name: $scope.foodName}, (food) ->
-                $scope.foods.unshift food
+                $scope.foods.push food
                 $scope.foodName = null
 
         $scope.deleteFood = (foodId) ->

@@ -29,8 +29,7 @@ EatingController = angular.module('foodDiaryApp')
                             if eatingfood.id == eatingFoodId
                                 index = eating.eatingfoods.indexOf eatingfood
                                 eating.eatingfoods.splice index, 1
-                                break
-                        break
+                                return
 
 EatingFoodFormController = angular.module('foodDiaryApp')
     .controller 'EatingFoodFormController', ($scope, FoodResource, EatingFoodResource) ->
@@ -60,5 +59,6 @@ EatingFoodFormController = angular.module('foodDiaryApp')
                 FoodResource.save {name: $scope.foodName}, (food) ->
                     data =
                         food_id: food.id
+                        count: $scope.foodCount
                         eating_id: eatingId
                     EatingFoodResource.save data, addEatingFood

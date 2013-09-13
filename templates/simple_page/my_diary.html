@@ -37,7 +37,7 @@
                                 </form>
                             </li>
                             <li ng-repeat="eatingfood in eating.eatingfoods">
-                                {{ eatingfood.name }} {{ food.count }}
+                                {{ eatingfood.name }} {{ eatingfood.count }}
                                 <button class="btn btn-small btn-danger" ng-click="deleteEatingFood(eating.id, eatingfood.id)">
                                     <i class="icon-minus"></i>
                                 </button>
@@ -58,12 +58,14 @@
                         </button>
                     </form>
                 </li>
-                <li ng-repeat="food in foods">
-                    {{ food.name }}
-                    <button class="btn btn-small btn-danger" ng-click="deleteFood(food.id)">
-                        <i class="icon-minus"></i>
-                    </button>
-                </li>
+                {% verbatim %}
+                    <li ng-repeat="food in foods">
+                        {{ food.name }}
+                        <button class="btn btn-small btn-danger" ng-click="deleteFood(food.id)">
+                            <i class="icon-minus"></i>
+                        </button>
+                    </li>
+                {% endverbatim %}
             </ul>
         </div>
     </div>

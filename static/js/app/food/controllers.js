@@ -13,7 +13,7 @@
       return FoodResource.save({
         name: $scope.foodName
       }, function(food) {
-        $scope.foods.unshift(food);
+        $scope.foods.push(food);
         return $scope.foodName = null;
       });
     };

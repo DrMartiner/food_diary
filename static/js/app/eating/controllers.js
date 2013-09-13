@@ -39,9 +39,8 @@
       return EatingFoodResource["delete"]({
         id: eatingFoodId
       }, function() {
-        var eating, eatingfood, index, _i, _j, _len, _len1, _ref, _ref1, _results;
+        var eating, eatingfood, index, _i, _j, _len, _len1, _ref, _ref1;
         _ref = $scope.eatings;
-        _results = [];
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           eating = _ref[_i];
           if (eating.id === eatingId) {
@@ -51,15 +50,11 @@
               if (eatingfood.id === eatingFoodId) {
                 index = eating.eatingfoods.indexOf(eatingfood);
                 eating.eatingfoods.splice(index, 1);
-                break;
+                return;
               }
             }
-            break;
-          } else {
-            _results.push(void 0);
           }
         }
-        return _results;
       });
     };
   });
@@ -99,6 +94,7 @@
         }, function(food) {
           data = {
             food_id: food.id,
+            count: $scope.foodCount,
             eating_id: eatingId
           };
           return EatingFoodResource.save(data, addEatingFood);
