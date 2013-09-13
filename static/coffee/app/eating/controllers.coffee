@@ -1,11 +1,8 @@
 'use strict';
 
 EatingController = angular.module('foodDiaryApp')
-    .controller 'EatingController', ($scope, FoodResource, EatingResource, EatingFoodResource) ->
+    .controller 'EatingController', ($scope, EatingResource, EatingFoodResource) ->
         $scope.eatings = []
-        $scope.foodId = null
-        $scope.foodName = null
-        $scope.foodCount = null
 
         $scope.loadEatings = () ->
             EatingResource.get (result) ->
@@ -35,6 +32,12 @@ EatingController = angular.module('foodDiaryApp')
                                 break
                         break
 
+EatingFoodFormController = angular.module('foodDiaryApp')
+    .controller 'EatingFoodFormController', ($scope, FoodResource, EatingFoodResource) ->
+        $scope.foodId = null
+        $scope.foodName = null
+        $scope.foodCount = null
+
         $scope.createEatingFood = (eatingId) ->
             addEatingFood = (eatingFood) ->
                 eatingFood.name = $scope.foodName
@@ -53,7 +56,6 @@ EatingController = angular.module('foodDiaryApp')
                     count: $scope.foodCount
                     eating_id: eatingId
                 EatingFoodResource.save data, addEatingFood
-
             else
                 FoodResource.save {name: $scope.foodName}, (food) ->
                     data =

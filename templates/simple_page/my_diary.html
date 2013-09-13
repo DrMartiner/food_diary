@@ -18,7 +18,7 @@
                     <span>
                         <div ng-click="eating.expand=!eating.expand">
                             <i ng-class='{"icon-chevron-down": eating.expand, "icon-chevron-right": !eating.expand}'></i>
-                            {{ eating.pub_date }}
+                            {{ eating.pub_date|date:"dd MMMM H:mm:ss"|lowercase }}
                         </div>
                         <button class="btn btn-small btn-danger" ng-click="deleteEating(eating.id)">
                             <i class="icon-trash"></i>
@@ -27,7 +27,7 @@
                     <div class="eating-foods" ng-show="eating.expand">
                         <ul>
                             <li>
-                                <form ng-submit="createEatingFood(eating.id)" ng-controller="EatingController">
+                                <form ng-controller="EatingFoodFormController" ng-submit="createEatingFood(eating.id)">
                                     <input type="hidden" ng-model="foodId" />
                                     <input type="text" ng-model="foodName" ng-required="" />
                                     <input type="text" ng-model="foodCount" maxlength="8" ng-maxlength="8" />
@@ -54,7 +54,6 @@
                     <form ng-controller="FoodController" ng-submit="createFood()">
                         <input type="text" ng-model="foodName" ng-required="" />
                         <button class="btn btn-small btn-success">
-                            Добавить
                             <i class="icon-plus"></i>
                         </button>
                     </form>
