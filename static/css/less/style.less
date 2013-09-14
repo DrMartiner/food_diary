@@ -1,3 +1,80 @@
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none;
 }
+
+.diary .row > div {
+    padding-left: 10px;
+}
+.diary h1 {
+    display: inline-block;
+}
+.diary .btn-add-eating {
+    float: right;
+    margin-top: 22px;
+    display: inline-block;
+}
+
+.diary .eatings {
+    margin-top: 17px;
+}
+.diary .eating {
+    display: block;
+    min-height: 20px;
+}
+.diary .eating > div {
+    display: inline-block;
+    cursor: pointer;
+}
+.diary .eating button {
+    float: right;
+//    margin-right: 5px;
+}
+.diary span.time {
+    font-size: 16px;
+    font-weight: bold;
+}
+.diary input[ng-model="foodName"] {
+    width: 170px;
+}
+.diary input[ng-model="foodCount"] {
+    width: 53px
+}
+.diary .eating-foods {
+    padding-top: 10px;
+}
+.diary .eating-foods form button {
+    margin-bottom: 11px;
+}
+.diary .eating-foods ul {
+    margin-left: 5px;
+    list-style: none;
+}
+.diary .eating-foods ul li {
+    min-height: 30px;
+}
+.diary .eating-foods ul li:not(:first-child) .food-name {
+    width: 176px;
+    display: inline-block;
+}
+.diary .eating-foods ul li:not(:first-child) .food-count {
+    width: 64px;
+    display: inline-block;
+    text-align: center;
+}
+.diary .eating-foods ul li:first-child form {
+    margin-bottom: 0;
+}
+.diary .eating-foods ul li:not(:first-child) button {
+    float: right;
+    cursor: pointer;
+}
+.diary .eating-foods ul li:not(:first-child) {
+    cursor: default;
+    border-bottom: 1px solid lightgray;
+}
+.diary .eating-foods ul li:last-child {
+    border-bottom: 0;
+}
+.diary .eating-foods ul li:not(:first-child):hover {
+    background-color: #fcf8ff;
+}
