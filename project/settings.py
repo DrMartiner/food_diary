@@ -9,7 +9,7 @@ try:
 except ImportError:
     print "Don't forget create settings_local.py"
 
-PROJECT_ROOT = os.path.normpath(os.path.dirname(__file__))
+PROJECT_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
 
 SITE_NAME = path.basename(path.realpath(path.curdir))
@@ -93,7 +93,7 @@ ROOT_URLCONF = 'project.urls'
 WSGI_APPLICATION = SITE_NAME + '.wsgi.application'
 
 TEMPLATE_DIRS = (
-    os.path.join(SITE_ROOT, 'templates'),
+    os.path.join(PROJECT_ROOT, 'templates'),
 )
 
 INSTALLED_APPS = (
@@ -111,8 +111,8 @@ INSTALLED_APPS = (
     'south',
     'email_html',
     'robots',
-    'rest_framework',
     'factory',
+    'tastypie',
 
     'apps.api',
     'apps.food',
@@ -210,12 +210,8 @@ LOGGING = {
     }
 }
 
-REST_FRAMEWORK = {
-    # 'DEFAULT_PERMISSION_CLASSES': [
-    #     'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    # ],
-    'DEFAULT_MODEL_SERIALIZER_CLASS': 'rest_framework.serializers.HyperlinkedModelSerializer',
-}
+APPEND_SLASH = False
+TASTYPIE_ALLOW_MISSING_SLASH = True
 
 try:
     from settings_local import *

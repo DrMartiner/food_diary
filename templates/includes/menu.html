@@ -1,0 +1,21 @@
+<div class="navbar">
+    <div class="navbar-inner">
+        <ul class="nav pull-left">
+            {% url 'home_page' as home_page_url %}
+            <li class="{% ifequal request.path home_page_url %}active{% endifequal %}">
+                <a href="{{ home_page_url }}">
+                    Главная
+                </a>
+            </li>
+            {% url 'my_diary' as my_diary_url %}
+            <li {% ifequal request.path my_diary_url %}class="active"{% endifequal %}>
+                <a href="{{ my_diary_url }}">Дневник</a>
+            </li>
+        </ul>
+        <ul class="nav pull-right">
+            <li>
+                <a href="#">Вход</a>
+            </li>
+        </ul>
+    </div>
+</div>

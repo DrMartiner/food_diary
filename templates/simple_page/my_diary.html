@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Мой дневник{% endblock %}
+{% block body_class %}diary{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ STATIC_URL }}js/app/eating/controllers.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="span4" ng-controller="EatingController" ng-init="loadEatings()" ng-cloak="">
+            <h4>Мой дневник</h4>
+{#            <button ng-click="createEating()" class="btn btn-small btn-success btn-add-eating">#}
+{#                <i class="icon-plus"></i>#}
+{#                Поесть#}
+{#            </button>#}
+            {% verbatim %}
+                <div ng-repeat="eating in eatings" class="eatings">
+                    <div class="eating">
+                        <div ng-click="eating.expand=!eating.expand">
+                            <i ng-class='{"icon-chevron-down": eating.expand, "icon-chevron-right": !eating.expand}'></i>
+                            <span class="time">{{ eating.pub_date|date:"H:mm"|lowercase }}</span>
+                        </div>
+                        <button class="btn btn-small btn-danger" ng-click="deleteEating(eating.id)">
+                            <i class="icon-trash"></i>
+                        </button>
+                    </div>
+                    <div class="eating-foods" ng-show="eating.expand">
+                        <ul>
+                            <li>
+                                <form ng-controller="EatingFoodFormController" ng-submit="createEatingFood(eating.id)">
+                                    <input type="hidden" ng-model="foodId" />
+                                    <input type="text" ng-model="foodName" required="" />
+                                    <input type="text" ng-model="foodCount" maxlength="8" ng-maxlength="8" />
+                                    <button class="btn btn-small btn-success">
+                                        <i class="icon-plus"></i>
+                                    </button>
+                                </form>
+                            </li>
+                            <li ng-repeat="eatingfood in eating.eatingfoods">
+                                <span class="food-name">{{ eatingfood.name }}</span>
+                                <span class="food-count" ng-if="eatingfood.count">{{ eatingfood.count }}</span>
+                                <button class="btn btn-small btn-inverse" ng-click="deleteEatingFood(eating.id, eatingfood.id)">
+                                    <i class="icon-white icon-minus"></i>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            {% endverbatim %}
+        </div>
+    </div>
+{% endblock %}

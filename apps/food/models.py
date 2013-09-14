@@ -11,22 +11,23 @@ class Food(models.Model):
     def __unicode__(self):
         return self.name
 
-    @property
-    def is_shared(self):
-        return self.user is None
-
     class Meta:
         ordering = ('name', 'user')
         verbose_name = 'Еда'
         verbose_name_plural = 'Наименование'
+        unique_together = ('name', 'user')
 
 
 class Eating(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='Автор')
     pub_date = models.DateTimeField('Время приема', auto_now_add=True)
 
+    @property
+    def foods(self):
+        return EatingFood.objects.filter(eating=self)
+
     class Meta:
-        ordering = ('pub_date', 'user')
+        ordering = ('-pub_date', )
         verbose_name = 'Приемы пищи'
         verbose_name_plural = 'Прием пищи'
 
@@ -35,6 +36,3 @@ class EatingFood(models.Model):
     eating = models.ForeignKey(Eating, verbose_name='Прием пищи')
     food = models.ForeignKey(Food, verbose_name='Еда')
     count = models.CharField('Кол-во', max_length=8, blank=True, null=True)
-
-    class Meta:
-        ordering = ('eating',)
