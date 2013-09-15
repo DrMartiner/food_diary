@@ -20,7 +20,7 @@
                     <div class="eating">
                         <div ng-click="eating.expand=!eating.expand">
                             <i ng-class='{"icon-chevron-down": eating.expand, "icon-chevron-right": !eating.expand}'></i>
-                            <span class="time">{{ eating.pub_date|date:"H:mm"|lowercase }}</span>
+                            <span class="time">{{ eating.pub_date|date:"dd MMMM HH:mm"|lowercase }}</span>
                         </div>
                         <button class="btn btn-small btn-danger" ng-click="deleteEating(eating.id)">
                             <i class="icon-trash"></i>
