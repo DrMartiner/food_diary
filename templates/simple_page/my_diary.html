@@ -10,11 +10,11 @@
 {% block content %}
     <div class="row">
         <div class="span4" ng-controller="EatingController" ng-init="loadEatings()" ng-cloak="">
-            <h4>Мой дневник</h4>
-{#            <button ng-click="createEating()" class="btn btn-small btn-success btn-add-eating">#}
-{#                <i class="icon-plus"></i>#}
-{#                Поесть#}
-{#            </button>#}
+            <h1>Мой дневник</h1>
+            <button ng-click="createEating()" class="btn btn-small btn-success btn-add-eating">
+                <i class="icon-plus"></i>
+                Поесть
+            </button>
             {% verbatim %}
                 <div ng-repeat="eating in eatings" class="eatings">
                     <div class="eating">

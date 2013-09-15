@@ -5274,6 +5274,7 @@ a.badge:focus {
 }
 .diary h1 {
   display: inline-block;
+  font-size: 24px;
 }
 .diary .btn-add-eating {
   float: right;
