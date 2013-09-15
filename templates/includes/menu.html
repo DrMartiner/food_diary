@@ -13,8 +13,9 @@
             </li>
         </ul>
         <ul class="nav pull-right">
-            <li>
-                <a href="#">Вход</a>
+            {% url 'login' as login_url %}
+            <li {% ifequal request.path login_url %}class="active"{% endifequal %}>
+                <a href="{{ login_url }}">Вход</a>
             </li>
         </ul>
     </div>

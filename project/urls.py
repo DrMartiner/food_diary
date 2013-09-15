@@ -14,7 +14,7 @@ urlpatterns = patterns('',
     url(r'^$', HomePage.as_view(), name='home_page'),
     url(r'^my-diary/$', MyDiaryPage.as_view(), name='my_diary'),
     url(r'^api/', include('apps.api.urls')),
-    # url(r'^account/', include('apps.users.urls')),
+    url(r'^users/', include('apps.users.urls')),
 
     url(r'^djangojs/', include('djangojs.urls')),
     url(r'^robots\.txt$', include('robots.urls')),

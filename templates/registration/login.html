@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Вход{% endblock %}
+{% block body_class %}registration{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="span12">
+            <ul>
+                <form action="{% url 'login' %}" method="POST">
+                    {% csrf_token %}
+                    {{ form.as_ul|safe }}
+                    <li>
+                        <input type="submit" value="Войти"/>
+                    </li>
+                </form>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
