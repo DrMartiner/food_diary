@@ -4,7 +4,7 @@
             {% url 'home_page' as home_page_url %}
             <li class="{% ifequal request.path home_page_url %}active{% endifequal %}">
                 <a href="{{ home_page_url }}">
-                    Главная
+                    <i class="icon-home"></i>
                 </a>
             </li>
             {% url 'my_diary' as my_diary_url %}
