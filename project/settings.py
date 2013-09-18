@@ -106,21 +106,28 @@ INSTALLED_APPS = (
     'django.contrib.admin',
 
     'admin_honeypot',
+    'crispy_forms',
     'djangojs',
     'eml_email_backend',
-    'south',
     'email_html',
-    'robots',
     'factory',
+    'registration',
+    'robots',
+    'south',
     'tastypie',
 
     'apps.api',
     'apps.food',
+    'apps.users',
     'django_cleanup',
 
     'django_coverage',
     'django_factory_boy',
 )
+
+AUTH_USER_MODEL = 'users.User'
+LOGIN_URL = '/users/login/'
+LOGIN_REDIRECT_URL = '/users/my-profile/'
 
 CONSTANCE_BACKEND = 'constance.backends.redisd.RedisBackend'
 CONSTANCE_SUPERUSER_ONLY = True
@@ -132,6 +139,8 @@ CONSTANCE_REDIS_CONNECTION = {
 CONSTANCE_CONFIG = {
 
 }
+
+CRISPY_TEMPLATE_PACK = 'bootstrap'
 
 LOGGING_DIR = os.path.join(SITE_ROOT, 'logs')
 LOGGING = {

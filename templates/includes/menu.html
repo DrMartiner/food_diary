@@ -13,10 +13,30 @@
             </li>
         </ul>
         <ul class="nav pull-right">
-            {% url 'login' as login_url %}
-            <li {% ifequal request.path login_url %}class="active"{% endifequal %}>
-                <a href="{{ login_url }}">Вход</a>
-            </li>
+            {% if request.user.is_authenticated %}
+                <li>
+                    <div class="btn-group pull-right">
+                        <a href="#" data-toggle="dropdown" class="btn dropdown-toggle {% if '/users/' in request.path %}active{% endif %}">
+                            <i class="icon-user"></i>
+                            {{ request.user.get_full_name }}
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="{% url 'users_myprofile' %}">Личный кабинет</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'logout' %}">Выйти</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            {% else %}
+                {% url 'login' as login_url %}
+                <li {% ifequal request.path login_url %}class="active"{% endifequal %}>
+                    <a href="{{ login_url }}">Вход</a>
+                </li>
+            {% endif %}
         </ul>
     </div>
 </div>

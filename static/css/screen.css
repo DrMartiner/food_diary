@@ -5394,3 +5394,9 @@ a.badge:focus {
     width: 874px;
   }
 }
+.phone_number__code {
+  width: 30px;
+}
+.phone_number__number {
+  width: 60px;
+}

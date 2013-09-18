@@ -7,7 +7,6 @@ from django.contrib.auth.models import UserManager as DjangoUserManager
 
 class UserManager(DjangoUserManager):
     def create_superuser(self, email, password, **extra_fields):
-        """ Set email as username, because username can't be blank """
         return super(UserManager, self).create_superuser(email, email, password, **extra_fields)
 
 
@@ -22,7 +21,6 @@ class User(AbstractUser):
     birth_date = models.DateField('Дата рождения', null=True, blank=True)
 
     objects = UserManager()
-    USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
     def __unicode__(self):

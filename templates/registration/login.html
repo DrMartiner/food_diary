@@ -1,20 +1,21 @@
 {% extends "base.html" %}
 
+{% load crispy_forms_tags %}
+
 {% block title %}Вход{% endblock %}
-{% block body_class %}registration{% endblock %}
+{% block body_class %}registration-login{% endblock %}
 
 {% block content %}
-    <div class="row">
-        <div class="span12">
-            <ul>
-                <form action="{% url 'login' %}" method="POST">
-                    {% csrf_token %}
-                    {{ form.as_ul|safe }}
-                    <li>
-                        <input type="submit" value="Войти"/>
-                    </li>
-                </form>
-            </ul>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="span4">
+                {% crispy form form.helper %}
+
+                <div class="well">
+                   Ппервый раз? <a href="{% url 'registration_register' %}">Регистрируйтесь</a>!<br />
+                   Забыли пароль? <a href="#">Восстановить пароль</a>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
