@@ -4,7 +4,7 @@ from fabric.api import *
 
 env.use_ssh_config = True
 
-BIN_PATH = '.virtualenv/bin/'
+BIN_PATH = '.env/bin/'
 PROJECT_DIR = 'food_diary'
 
 @task
