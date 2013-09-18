@@ -14,7 +14,6 @@
     margin-top: 22px;
     display: inline-block;
 }
-
 .diary .eatings {
     margin-top: 17px;
 }
@@ -33,12 +32,6 @@
     font-size: 16px;
     font-weight: bold;
 }
-.diary input[ng-model="foodName"] {
-    width: 170px;
-}
-.diary input[ng-model="foodCount"] {
-    width: 53px
-}
 .diary .eating-foods {
     padding-top: 10px;
 }
@@ -52,14 +45,19 @@
 .diary .eating-foods ul li {
     min-height: 30px;
 }
+.diary input[ng-model="foodCount"] {
+    width: 43px
+}
 .diary .eating-foods ul li:not(:first-child) .food-name {
-    width: 176px;
+    padding-top: 5px;
+    padding-left: 5px;
     display: inline-block;
 }
 .diary .eating-foods ul li:not(:first-child) .food-count {
-    width: 64px;
-    display: inline-block;
+    width: 53px;
+    padding-top: 5px;
     text-align: center;
+    display: inline-block;
 }
 .diary .eating-foods ul li:first-child form {
     margin-bottom: 0;
@@ -76,5 +74,60 @@
     border-bottom: 0;
 }
 .diary .eating-foods ul li:not(:first-child):hover {
-    background-color: #fcf8ff;
+    background-color: #d2cdd4;
+}
+
+// iPhone 4s & 5
+@media (max-width: 640px) and (orientation: portrait) {
+    .diary input[ng-model="foodName"] {
+        width: 160px;
+    }
+    .diary .eating-foods ul li:not(:first-child) .food-name {
+        width: 170px;
+    }
+    .diary .eating-block {
+        width: 280px;
+    }
+}
+@media (max-width: 1136px) and (orientation: landscape) {
+    .diary input[ng-model="foodName"] {
+        width: 407px;
+    }
+    .diary .eating-foods ul li:not(:first-child) .food-name {
+        width: 417px;
+    }
+}
+@media (max-width: 960px) and (orientation: landscape) {
+    .diary input[ng-model="foodName"] {
+        width: 320px;
+    }
+    .diary .eating-foods ul li:not(:first-child) .food-name {
+        width: 330px;
+    }
+}
+@media (max-width: 960px) and (orientation: landscape) {
+    .diary input[ng-model="foodName"] {
+        width: 320px;
+    }
+    .diary .eating-foods ul li:not(:first-child) .food-name {
+        width: 330px;
+    }
+}
+
+// iPad
+@media (max-width: 768px) and (orientation: portrait) {
+    .diary input[ng-model="foodName"] {
+        width: 608px;
+    }
+    .diary .eating-foods ul li:not(:first-child) .food-name {
+        width: 618px;
+    }
+}
+@media (max-width: 1024px) and (orientation: landscape) {
+    .diary input[ng-model="foodName"] {
+        width: 864px;
+    }
+    .diary .eating-foods ul li:not(:first-child) .food-name {
+        width: 874px;
+    }
 }
