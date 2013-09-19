@@ -26,11 +26,4 @@ class User(AbstractUser):
     def __unicode__(self):
         return self.get_full_name()
 
-    def get_full_name(self):
-        return u'%s %s' % (self.last_name, self.first_name)
-
-    @property
-    def name(self):
-        return '%s %s' % (self.last_name, self.first_name)
-
 User._meta.get_field('email')._unique = True
