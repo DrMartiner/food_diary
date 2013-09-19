@@ -38,6 +38,9 @@ DATABASES = {
 INTERNAL_IPS = ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
+    'local.drmartiner.pro',
+    'xn----ctbfccctqxc3n.xn--p1ai',
+    'food-diary.ru',
 ]
 
 TIME_ZONE = 'Europe/Moscow'
