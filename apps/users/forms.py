@@ -23,8 +23,8 @@ class UserCreationForm(DjangoUserCreationForm):
 
     def clean_email(self):
         cd = self.cleaned_data
-        if User.objects.filter(email=cd['email']).exists():
-            raise ValidationError('Почта должна быть уникальной')
+        if User.objects.filter(email__iexact=cd['email']).exists():
+            raise ValidationError('Пользователь с такой почтой уже зарегистрирован')
         return cd['email']
 
     def clean_username(self):
