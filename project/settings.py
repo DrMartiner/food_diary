@@ -243,7 +243,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 EMAIL_HOST_USER = 'food.diary88@gmail.com'
-DEFAULT_FROM_EMAIL = 'food.diary88@gmail.com'
+DEFAULT_FROM_EMAIL = u'Дневник еды <food.diary88@gmail.com>'
 EMAIL_HOST_PASSWORD = ''
 
 SMSAERO_USER = 'DrMartiner@GMail.Com'
