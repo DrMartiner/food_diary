@@ -2,7 +2,9 @@
 
 from random import randrange
 from django.contrib.sites.models import Site, RequestSite
+from django.template.loader import render_to_string
 from registration import signals
+from smsaero.utils import send_sms
 from django.contrib.auth import get_user_model, authenticate, login
 from registration.backends.default import DefaultBackend
 from random_words import RandomWords
@@ -27,9 +29,9 @@ class RegisterBackend(DefaultBackend):
         new_user = RegistrationProfile.objects.create_inactive_user(kwargs['phone'], kwargs['email'], password, site)
 
         new_user.first_name = kwargs['first_name']
-        new_user.last_name=kwargs.get('last_name', '')
-        new_user.sex=kwargs.get('sex', '')
-        new_user.birth_date=kwargs.get('birth_date', '')
+        new_user.last_name = kwargs.get('last_name', '')
+        new_user.sex = kwargs.get('sex', '')
+        new_user.birth_date = kwargs.get('birth_date', '')
         new_user.save()
 
         # Authenticate the new user
@@ -37,7 +39,12 @@ class RegisterBackend(DefaultBackend):
         if user is not None:
             login(request, user)
 
-        # TODO: Send the password
+        ctx = {
+            'site': site,
+            'password': password,
+        }
+        sms_message = render_to_string('registration/activation_sms_message.txt', ctx)
+        send_sms(user.username, sms_message)
 
         signals.user_registered.send(sender=self.__class__, user=user, request=request)
 

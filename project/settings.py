@@ -114,6 +114,7 @@ INSTALLED_APPS = (
     'pytils',
     'registration',
     'robots',
+    'smsaero',
     'south',
     'tastypie',
 
@@ -140,6 +141,15 @@ CONSTANCE_REDIS_CONNECTION = {
 }
 CONSTANCE_CONFIG = {
 
+}
+
+RQ_QUEUES = {
+    'default': {
+        'HOST': 'localhost',
+        'PORT': 6379,
+        'DB': 0,
+        'PASSWORD': '',
+    },
 }
 
 CRISPY_TEMPLATE_PACK = 'bootstrap'
@@ -231,6 +241,9 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'food.diary88@gmail.com'
 DEFAULT_FROM_EMAIL = 'food.diary88@gmail.com'
 EMAIL_HOST_PASSWORD = ''
+
+SMSAERO_USER = 'DrMartiner@GMail.Com'
+SMSAERO_PASSWORD_MD5 = ''
 
 try:
     from settings_local import *

@@ -32,3 +32,5 @@ django-tastypie
 python-mimeparse
 git+https://github.com/mwieler/django-registration-1.5.git
 django-crispy-forms
+django-rq
+django-smsaero

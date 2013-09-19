@@ -1,0 +1,1 @@
+Parol dlya vhoda na http://{{ site }} - {{ password }}
