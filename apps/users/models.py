@@ -2,12 +2,6 @@
 
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.contrib.auth.models import UserManager as DjangoUserManager
-
-
-class UserManager(DjangoUserManager):
-    def create_superuser(self, email, password, **extra_fields):
-        return super(UserManager, self).create_superuser(email, email, password, **extra_fields)
 
 
 class User(AbstractUser):
@@ -20,7 +14,6 @@ class User(AbstractUser):
     sex = models.CharField('Пол', choices=SEX_CHOICES, max_length=1, default=SEX_MALE)
     birth_date = models.DateField('Дата рождения', null=True, blank=True)
 
-    objects = UserManager()
     REQUIRED_FIELDS = []
 
     def __unicode__(self):
