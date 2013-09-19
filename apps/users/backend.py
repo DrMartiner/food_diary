@@ -44,7 +44,7 @@ class RegisterBackend(DefaultBackend):
             'password': password,
         }
         sms_message = render_to_string('registration/activation_sms_message.txt', ctx)
-        send_sms(user.username, sms_message)
+        send_sms(user.username, sms_message.encode('utf-8'))
 
         signals.user_registered.send(sender=self.__class__, user=user, request=request)
 
