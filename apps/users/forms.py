@@ -30,13 +30,6 @@ class UserCreationForm(DjangoUserCreationForm):
     def clean_username(self):
         return self.cleaned_data['username']
 
-    def save(self, commit=True):
-        user = super(UserCreationForm, self).save(commit=False)
-        user.email = self.cleaned_data['username']
-        if commit:
-            user.save()
-        return user
-
 
 class UserChangeForm(DjangoUserChangeForm):
     username = forms.CharField(required=False)
@@ -52,7 +45,7 @@ class UserChangeForm(DjangoUserChangeForm):
 
     def clean_email(self):
         cd = self.cleaned_data
-        if User.objects.filter(email=cd['email']).exclude(id=self.id).exists():
+        if User.objects.filter(email__iexact=cd['email']).exclude(id=self.id).exists():
             raise ValidationError('Почта должна быть уникальной')
         return cd['email']
 
@@ -83,6 +76,12 @@ class RegistrationForm(forms.ModelForm):
                                     help_text='Телефон будет использоваться в качестве логина.')
     contract = forms.BooleanField(widget=forms.CheckboxInput(),
                                   label=u'Согласен с условиями <a target="_blank" href="/contract/">договора</a>')
+
+    def clean_email(self):
+        cd = self.cleaned_data
+        if User.objects.filter(email__iexact=cd['email']).exists():
+            raise ValidationError('Пользователь с такой почтой уже зарегистрирован')
+        return cd['email']
 
     def clean_phone(self):
         user = get_object_or_None(User, username=self.cleaned_data['phone'])
