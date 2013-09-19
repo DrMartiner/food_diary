@@ -111,6 +111,7 @@ INSTALLED_APPS = (
     'eml_email_backend',
     'email_html',
     'factory',
+    'pytils',
     'registration',
     'robots',
     'south',
@@ -125,6 +126,7 @@ INSTALLED_APPS = (
     'django_factory_boy',
 )
 
+ACCOUNT_ACTIVATION_DAYS = 3
 AUTH_USER_MODEL = 'users.User'
 LOGIN_URL = '/users/login/'
 LOGIN_REDIRECT_URL = '/users/my-profile/'
@@ -221,6 +223,14 @@ LOGGING = {
 
 APPEND_SLASH = False
 TASTYPIE_ALLOW_MISSING_SLASH = True
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = 'food.diary88@gmail.com'
+DEFAULT_FROM_EMAIL = 'food.diary88@gmail.com'
+EMAIL_HOST_PASSWORD = ''
 
 try:
     from settings_local import *

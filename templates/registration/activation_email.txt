@@ -1,0 +1,2 @@
+{% load pytils_numeral %}
+Активируйте дневник еды по ссылке http://{{ site }}{% url 'registration_activate' activation_key %} в течение {{ expiration_days }} {{ expiration_days|choose_plural:"дня,дней,дней" }}
