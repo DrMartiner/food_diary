@@ -9,6 +9,7 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from annoying.functions import get_object_or_None
 from django.contrib.auth.forms import AuthenticationForm
+from yacaptcha.fields import YaCaptchaField
 from .fields import RussianPhoneNumberField
 from django import forms
 
@@ -76,6 +77,7 @@ class RegistrationForm(forms.ModelForm):
                                     help_text='Телефон будет использоваться в качестве логина.')
     contract = forms.BooleanField(widget=forms.CheckboxInput(),
                                   label=u'Согласен с условиями <a target="_blank" href="/contract/">договора</a>')
+    captcha = YaCaptchaField(label='Введите текст с картинки')
 
     def clean_email(self):
         cd = self.cleaned_data
@@ -108,6 +110,7 @@ class RegistrationForm(forms.ModelForm):
             'last_name',
             'sex',
             'birth_date',
+            'captcha',
             'contract',
             FormActions(
                 Submit('submit', u'Зарегистрироваться')

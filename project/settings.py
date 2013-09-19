@@ -120,6 +120,7 @@ INSTALLED_APPS = (
     'smsaero',
     'south',
     'tastypie',
+    'yacaptcha',
 
     'apps.api',
     'apps.food',
@@ -247,6 +248,8 @@ EMAIL_HOST_PASSWORD = ''
 
 SMSAERO_USER = 'DrMartiner@GMail.Com'
 SMSAERO_PASSWORD_MD5 = ''
+
+YACAPTCHA_KEY = 'cw.1.1.20130919T113544Z.b9872ef11e9abca4.ef6a13d0662edc250feeaf8cbfca869141af2083'
 
 try:
     from settings_local import *
