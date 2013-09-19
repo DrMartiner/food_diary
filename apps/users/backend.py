@@ -26,10 +26,9 @@ class RegisterBackend(DefaultBackend):
             sex=kwargs.get('sex', ''),
             birth_date=kwargs.get('birth_date', ''),
         )
-        user.save()
-
         password = generate_password()
         user.set_password(password)
+        user.save()
 
         # TODO: Send the password
 
