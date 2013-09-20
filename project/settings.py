@@ -54,16 +54,19 @@ USE_L10N = True
 USE_TZ = True
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.normpath(os.path.join(SITE_ROOT, 'media'))
+MEDIA_ROOT = os.path.normpath(os.path.join(PROJECT_ROOT, 'media'))
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.normpath(os.path.join(SITE_ROOT, 'static'))
+STATIC_ROOT = os.path.normpath(os.path.join(PROJECT_ROOT, 'static'))
+
+COMPRESS_ROOT = STATIC_ROOT
 
 STATICFILES_DIRS = ()
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 TEMPLATE_LOADERS = (
@@ -109,6 +112,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
 
     'admin_honeypot',
+    'compressor',
     'crispy_forms',
     'djangojs',
     'eml_email_backend',
@@ -158,7 +162,7 @@ RQ_QUEUES = {
 
 CRISPY_TEMPLATE_PACK = 'bootstrap'
 
-LOGGING_DIR = os.path.join(SITE_ROOT, 'logs')
+LOGGING_DIR = os.path.join(PROJECT_ROOT, 'logs')
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,

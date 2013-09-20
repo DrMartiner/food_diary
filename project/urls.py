@@ -18,6 +18,8 @@ urlpatterns = patterns('',
 
     url(r'^djangojs/', include('djangojs.urls')),
     url(r'^robots\.txt$', include('robots.urls')),
+    url(r'^media/(.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, 'show_indexes': True, }),
+    url(r'^static/(.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT, 'show_indexes': True, }),
 )
 
 if settings.DEBUG:

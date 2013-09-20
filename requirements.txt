@@ -35,3 +35,4 @@ django-crispy-forms
 django-rq
 django-smsaero
 django-yacaptcha
+django_compressor
