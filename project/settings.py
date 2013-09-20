@@ -43,6 +43,7 @@ INTERNAL_IPS = ALLOWED_HOSTS = [
     'food-diary.ru',
 ]
 
+USE_TZ = True
 TIME_ZONE = 'Europe/Moscow'
 
 LANGUAGE_CODE = 'ru'
@@ -51,7 +52,6 @@ SITE_ID = 1
 
 USE_I18N = True
 USE_L10N = True
-USE_TZ = True
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.normpath(os.path.join(PROJECT_ROOT, 'media'))
