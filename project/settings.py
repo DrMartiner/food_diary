@@ -58,10 +58,9 @@ MEDIA_ROOT = os.path.normpath(os.path.join(PROJECT_ROOT, 'media'))
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.normpath(os.path.join(PROJECT_ROOT, 'static'))
+STATICFILES_DIRS = ()
 
 COMPRESS_ROOT = STATIC_ROOT
-
-STATICFILES_DIRS = ()
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
