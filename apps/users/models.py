@@ -14,8 +14,6 @@ class User(AbstractUser):
     sex = models.CharField('Пол', choices=SEX_CHOICES, max_length=1, default=SEX_MALE)
     birth_date = models.DateField('Дата рождения', null=True, blank=True)
 
-    REQUIRED_FIELDS = []
-
     def __unicode__(self):
         return self.get_full_name()
 
