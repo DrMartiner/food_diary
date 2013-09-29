@@ -5281,8 +5281,15 @@ a.badge:focus {
   margin-top: 22px;
   display: inline-block;
 }
+.diary .eatings-date h3 {
+  cursor: pointer;
+}
+.diary .eatings-date h3 > i {
+  margin-top: 8px;
+}
 .diary .eatings {
   margin-top: 17px;
+  padding-left: 10px;
 }
 .diary .eating {
   display: block;
@@ -5311,6 +5318,7 @@ a.badge:focus {
 }
 .diary .eating-foods ul li {
   min-height: 30px;
+  border-radius: 5px;
 }
 .diary input[ng-model="foodCount"] {
   width: 43px;

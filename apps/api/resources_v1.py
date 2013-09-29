@@ -19,27 +19,6 @@ class BaseResource(ModelResource):
     def obj_create(self, bundle, **kwargs):
         return super(BaseResource, self).obj_create(bundle, user=bundle.request.user)
 
-    def get_list(self, request, **kwargs):
-        base_bundle = self.build_bundle(request=request)
-        objects = self.obj_get_list(bundle=base_bundle, **self.remove_api_resource_names(kwargs))
-        objects = self.custom_sorting(objects, request)
-        sorted_objects = self.apply_sorting(objects, options=request.GET)
-
-        paginator = self._meta.paginator_class(request.GET, sorted_objects, resource_uri=self.get_resource_uri(),
-                                               limit=self._meta.limit, max_limit=self._meta.max_limit,
-                                               collection_name=self._meta.collection_name)
-        to_be_serialized = paginator.page()
-
-        bundles = []
-
-        for obj in to_be_serialized[self._meta.collection_name]:
-            bundle = self.build_bundle(obj=obj, request=request)
-            bundles.append(self.full_dehydrate(bundle, for_list=True))
-
-        to_be_serialized[self._meta.collection_name] = bundles
-        to_be_serialized = self.alter_list_data_to_serialize(request, to_be_serialized)
-        return self.create_response(request, to_be_serialized)
-
     def obj_create(self, bundle, **kwargs):
         kwargs.update({'user': bundle.request.user})
         return super(BaseResource, self).obj_create(bundle, **kwargs)
@@ -52,9 +31,6 @@ class BaseResource(ModelResource):
         kwargs.update({'user': bundle.request.user})
         return super(BaseResource, self).obj_delete(bundle, **kwargs)
 
-    def custom_sorting(self, objects, request):
-        return objects
-
     class Meta:
         limit = 10
         always_return_data = True
@@ -64,8 +40,9 @@ class BaseResource(ModelResource):
 
 
 class FoodResource(BaseResource):
-    def custom_sorting(self, objects, request):
-        return objects.filter(
+    def apply_filters(self, request, applicable_filters):
+        qset = super(FoodResource, self).apply_filters(request, applicable_filters)
+        return qset.filter(
             Q(user=request.user) | Q(user__isnull=True)
         )
 
@@ -93,19 +70,20 @@ class FoodResource(BaseResource):
 
 
 class EatingResource(BaseResource):
-    def dehydrate(self, bundle):
-        bundle.data['eatingfoods'] = []
-        for eatingfood in bundle.obj.foods:
-            bundle.data['eatingfoods'].append({
-                'id': eatingfood.id,
-                'name': eatingfood.food.name,
-                'count': eatingfood.count,
-                'food_id': eatingfood.food.id,
-            })
-        return bundle
+    def apply_filters(self, request, applicable_filters):
+        qset = super(EatingResource, self).apply_filters(request, applicable_filters)
+        return qset.filter(user=request.user)
 
-    def custom_sorting(self, objects, request):
-        return objects.filter(user=request.user)
+    def alter_detail_data_to_serialize(self, request, data):
+        data.data['eatingfoods'] = data.obj.eatingfoods
+        return data
+
+    def alter_list_data_to_serialize(self, request, data):
+        results = []
+        for bundle in data['objects']:
+            bundle.data['eatingfoods'] = bundle.obj.eatingfoods
+            results.append(bundle)
+        return data
 
     class Meta(BaseResource.Meta):
         resource_name = 'eating'
@@ -118,6 +96,10 @@ class EatingResource(BaseResource):
 
 
 class EatingFoodResource(BaseResource):
+    def apply_filters(self, request, applicable_filters):
+        qset = super(EatingFoodResource, self).apply_filters(request, applicable_filters)
+        return qset.filter(user=request.user)
+
     def obj_create(self, bundle, **kwargs):
         kwargs.update({
             'food_id': bundle.data.get('food_id'),
@@ -133,9 +115,6 @@ class EatingFoodResource(BaseResource):
     def obj_delete(self, bundle, **kwargs):
         kwargs.update({'eating__user': bundle.request.user})
         super(ModelResource, self).obj_delete(bundle, **kwargs)
-
-    def custom_sorting(self, objects, request):
-        return objects.filter(user=request.user)
 
     class Meta(BaseResource.Meta):
         resource_name = 'eatingfood'

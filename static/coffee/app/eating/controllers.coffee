@@ -2,33 +2,37 @@
 
 EatingController = angular.module('foodDiaryApp')
     .controller 'EatingController', ($scope, EatingResource, EatingFoodResource) ->
-        $scope.eatings = []
+        $scope.allEatings = {}
 
         $scope.loadEatings = () ->
             EatingResource.get (result) ->
-                $scope.eatings = result.objects
+                $scope.allEatings = t = _.groupBy result.objects, (obj) ->
+                    return obj.pub_date[..9]
 
         $scope.createEating = () ->
             EatingResource.save {}, (eating) ->
                 eating.expand = true
-                $scope.eatings.unshift eating
+                pubDate = eating.pub_date[..9]
+                if not $scope.allEatings[pubDate]
+                    $scope.allEatings[pubDate] = []
+                $scope.allEatings[pubDate].unshift eating
 
         $scope.deleteEating = (eatingId) ->
             EatingResource.delete {id: eatingId}, () ->
-                for eating in $scope.eatings
-                    if eating.id == eatingId
-                        index = $scope.eatings.indexOf eating
-                        $scope.eatings.splice index, 1
-                        break
+                for date, eatings of $scope.allEatings
+                    for eating in eatings
+                        if eating.id == eatingId
+                            $scope.allEatings[date] = _.without eatings, eating
+                            if not $scope.allEatings[date].length
+                                delete $scope.allEatings[date]
 
         $scope.deleteEatingFood = (eatingId, eatingFoodId)  ->
             EatingFoodResource.delete {id: eatingFoodId}, () ->
-                for eating in $scope.eatings
-                    if eating.id == eatingId
+                for date, eatings of $scope.allEatings
+                    for eating in eatings
                         for eatingfood in eating.eatingfoods
                             if eatingfood.id == eatingFoodId
-                                index = eating.eatingfoods.indexOf eatingfood
-                                eating.eatingfoods.splice index, 1
+                                _.without eating.eatingfoods, eatingfood
                                 return
 
 EatingFoodFormController = angular.module('foodDiaryApp')

@@ -30,3 +30,4 @@ static/grappelli/*
 static/filebrowser/*
 static/CACHE/*
 node_modules/*
+dump.rdb

@@ -23,8 +23,16 @@ class Eating(models.Model):
     pub_date = models.DateTimeField('Время приема', auto_now_add=True)
 
     @property
-    def foods(self):
-        return EatingFood.objects.filter(eating=self)
+    def eatingfoods(self):
+        eatingfoods = []
+        for eatingfood in EatingFood.objects.filter(eating=self):
+            eatingfoods.append({
+                'id': eatingfood.pk,
+                'name': eatingfood.food.name,
+                'count': eatingfood.count,
+                'food_id': eatingfood.food.pk,
+            })
+        return eatingfoods
 
     class Meta:
         ordering = ('-pub_date', )
