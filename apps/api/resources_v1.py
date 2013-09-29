@@ -74,16 +74,16 @@ class EatingResource(BaseResource):
         qset = super(EatingResource, self).apply_filters(request, applicable_filters)
         return qset.filter(user=request.user)
 
-    def dehydrate(self, bundle):
-        bundle.data['eatingfoods'] = []
-        for eatingfood in bundle.obj.foods:
-            bundle.data['eatingfoods'].append({
-                'id': eatingfood.id,
-                'name': eatingfood.food.name,
-                'count': eatingfood.count,
-                'food_id': eatingfood.food.id,
-            })
-        return bundle
+    def alter_detail_data_to_serialize(self, request, data):
+        data.data['eatingfoods'] = data.obj.eatingfoods
+        return data
+
+    def alter_list_data_to_serialize(self, request, data):
+        results = []
+        for bundle in data['objects']:
+            bundle.data['eatingfoods'] = bundle.obj.eatingfoods
+            results.append(bundle)
+        return data
 
     class Meta(BaseResource.Meta):
         resource_name = 'eating'
