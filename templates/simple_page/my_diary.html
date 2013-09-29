@@ -18,8 +18,11 @@
                 </button>
                 {% verbatim %}
                     <div ng-repeat="(date, eatings) in allEatings" class="eatings-date">
-                        <h3>{{ date }}</h3>
-                        <div ng-repeat="eating in eatings" class="eatings">
+                        <h3 ng-click="eatings.expand=!eatings.expand">
+                            <i ng-class='{"icon-chevron-down": eatings.expand, "icon-chevron-right": !eatings.expand}'></i>
+                            {{ date }}
+                        </h3>
+                        <div ng-repeat="eating in eatings" class="eatings" ng-show="eatings.expand">
                             <div class="eating">
                                 <div ng-click="eating.expand=!eating.expand">
                                     <i ng-class='{"icon-chevron-down": eating.expand, "icon-chevron-right": !eating.expand}'></i>
