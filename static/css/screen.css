@@ -5353,53 +5353,53 @@ a.badge:focus {
 }
 @media (max-width: 640px) and (orientation: portrait) {
   .diary input[ng-model="foodName"] {
-    width: 160px;
+    width: 150px;
   }
   .diary .eating-foods ul li:not(:first-child) .food-name {
-    width: 170px;
+    width: 160px;
   }
   .diary .eating-block {
-    width: 280px;
+    width: 270px;
   }
 }
 @media (max-width: 1136px) and (orientation: landscape) {
   .diary input[ng-model="foodName"] {
+    width: 397px;
+  }
+  .diary .eating-foods ul li:not(:first-child) .food-name {
     width: 407px;
   }
+}
+@media (max-width: 960px) and (orientation: landscape) {
+  .diary input[ng-model="foodName"] {
+    width: 310px;
+  }
   .diary .eating-foods ul li:not(:first-child) .food-name {
-    width: 417px;
+    width: 320px;
   }
 }
 @media (max-width: 960px) and (orientation: landscape) {
   .diary input[ng-model="foodName"] {
-    width: 320px;
+    width: 310px;
   }
   .diary .eating-foods ul li:not(:first-child) .food-name {
-    width: 330px;
-  }
-}
-@media (max-width: 960px) and (orientation: landscape) {
-  .diary input[ng-model="foodName"] {
     width: 320px;
-  }
-  .diary .eating-foods ul li:not(:first-child) .food-name {
-    width: 330px;
   }
 }
 @media (max-width: 768px) and (orientation: portrait) {
   .diary input[ng-model="foodName"] {
-    width: 608px;
+    width: 598px;
   }
   .diary .eating-foods ul li:not(:first-child) .food-name {
-    width: 618px;
+    width: 608px;
   }
 }
 @media (max-width: 1024px) and (orientation: landscape) {
   .diary input[ng-model="foodName"] {
-    width: 864px;
+    width: 854px;
   }
   .diary .eating-foods ul li:not(:first-child) .food-name {
-    width: 874px;
+    width: 864px;
   }
 }
 .phone_number__code {
