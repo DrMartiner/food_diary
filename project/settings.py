@@ -35,10 +35,13 @@ DATABASES = {
     },
 }
 
-INTERNAL_IPS = ALLOWED_HOSTS = [
+INTERNAL_IPS = [
     '127.0.0.1',
     'localhost',
     'local.drmartiner.pro',
+]
+
+ALLOWED_HOSTS = [
     'xn----ctbfccctqxc3n.xn--p1ai',
     'food-diary.ru',
 ]
