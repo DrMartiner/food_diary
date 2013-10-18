@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-import json
-from annoying.functions import get_object_or_None
 
 from django.db.models import Q
-from django.forms import model_to_dict
+from annoying.functions import get_object_or_None
 from tastypie.resources import ModelResource
 from tastypie.authorization import Authorization
 from tastypie.authentication import SessionAuthentication
