@@ -20,20 +20,21 @@ EatingController = angular.module('foodDiaryApp')
         $scope.deleteEating = (eatingId) ->
             EatingResource.delete {id: eatingId}, () ->
                 for date, eatings of $scope.allEatings
-                    for eating in eatings
-                        if eating.id == eatingId
-                            $scope.allEatings[date] = _.without eatings, eating
-                            if not $scope.allEatings[date].length
-                                delete $scope.allEatings[date]
+                    eating = _.findWhere eatings, {id: eatingId}
+                    if eating
+                        $scope.allEatings[date] = _.without eatings, eating
+                        if not $scope.allEatings[date].length
+                            delete $scope.allEatings[date]
+
+                        break
 
         $scope.deleteEatingFood = (eatingId, eatingFoodId)  ->
             EatingFoodResource.delete {id: eatingFoodId}, () ->
                 for date, eatings of $scope.allEatings
-                    for eating in eatings
-                        for eatingfood in eating.eatingfoods
-                            if eatingfood.id == eatingFoodId
-                                _.without eating.eatingfoods, eatingfood
-                                return
+                    eating = _.findWhere eatings, {id: eatingId}
+                    if eating
+                        eatingfood = _.findWhere eatings, {id: eatingFoodId}
+                        eating.eatingfoods = _.without eating.eatingfoods, eatingfood
 
 EatingFoodFormController = angular.module('foodDiaryApp')
     .controller 'EatingFoodFormController', ($scope, FoodResource, EatingFoodResource) ->

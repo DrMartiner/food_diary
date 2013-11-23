@@ -32,24 +32,18 @@
         _results = [];
         for (date in _ref) {
           eatings = _ref[date];
-          _results.push((function() {
-            var _i, _len, _results1;
-            _results1 = [];
-            for (_i = 0, _len = eatings.length; _i < _len; _i++) {
-              eating = eatings[_i];
-              if (eating.id === eatingId) {
-                $scope.allEatings[date] = _.without(eatings, eating);
-                if (!$scope.allEatings[date].length) {
-                  _results1.push(delete $scope.allEatings[date]);
-                } else {
-                  _results1.push(void 0);
-                }
-              } else {
-                _results1.push(void 0);
-              }
+          eating = _.findWhere(eatings, {
+            id: eatingId
+          });
+          if (eating) {
+            $scope.allEatings[date] = _.without(eatings, eating);
+            if (!$scope.allEatings[date].length) {
+              delete $scope.allEatings[date];
             }
-            return _results1;
-          })());
+            break;
+          } else {
+            _results.push(void 0);
+          }
         }
         return _results;
       });
@@ -58,22 +52,24 @@
       return EatingFoodResource["delete"]({
         id: eatingFoodId
       }, function() {
-        var date, eating, eatingfood, eatings, _i, _j, _len, _len1, _ref, _ref1;
+        var date, eating, eatingfood, eatings, _ref, _results;
         _ref = $scope.allEatings;
+        _results = [];
         for (date in _ref) {
           eatings = _ref[date];
-          for (_i = 0, _len = eatings.length; _i < _len; _i++) {
-            eating = eatings[_i];
-            _ref1 = eating.eatingfoods;
-            for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
-              eatingfood = _ref1[_j];
-              if (eatingfood.id === eatingFoodId) {
-                _.without(eating.eatingfoods, eatingfood);
-                return;
-              }
-            }
+          eating = _.findWhere(eatings, {
+            id: eatingId
+          });
+          if (eating) {
+            eatingfood = _.findWhere(eatings, {
+              id: eatingFoodId
+            });
+            _results.push(eating.eatingfoods = _.without(eating.eatingfoods, eatingfood));
+          } else {
+            _results.push(void 0);
           }
         }
+        return _results;
       });
     };
   });
