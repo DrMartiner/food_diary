@@ -15,9 +15,6 @@ class BaseResource(ModelResource):
         return 'application/json'
 
     def obj_create(self, bundle, **kwargs):
-        return super(BaseResource, self).obj_create(bundle, user=bundle.request.user)
-
-    def obj_create(self, bundle, **kwargs):
         kwargs.update({'user': bundle.request.user})
         return super(BaseResource, self).obj_create(bundle, **kwargs)
 
